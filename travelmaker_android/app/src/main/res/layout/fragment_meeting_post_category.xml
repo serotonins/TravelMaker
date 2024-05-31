@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_meeting_post_category_title"
+        style="@style/Text.Regular20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="70dp"
+        android:background="@drawable/background_text_title"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:text="@string/meeting_category_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroup1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:chipSpacingHorizontal="20dp"
+        app:layout_constraintStart_toStartOf="@id/tv_meeting_post_category_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_meeting_post_category_title">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_taste"
+            style="@style/chipRegular"
+            android:text="@string/sign_chip_taste" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_healing"
+            style="@style/chipRegular"
+            android:text="@string/sign_chip_healing" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_culture"
+            style="@style/chipRegular"
+            android:text="@string/sign_chip_culture" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_shopping"
+            style="@style/chipRegular"
+            android:text="@string/sign_chip_shopping" />
+    </com.google.android.material.chip.ChipGroup>
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroup2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="20dp"
+        app:chipSpacingHorizontal="20dp"
+        app:layout_constraintStart_toStartOf="@id/tv_meeting_post_category_title"
+        app:layout_constraintTop_toBottomOf="@+id/chipGroup1">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_active"
+            style="@style/chipRegular"
+            android:text="@string/sign_chip_active" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_picture"
+            style="@style/chipRegular"
+            android:text="@string/sign_chip_picture" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_nature"
+            style="@style/chipRegular"
+            android:text="@string/sign_chip_nature" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_rest"
+            style="@style/chipRegular"
+            android:text="@string/chip_rest" />
+
+    </com.google.android.material.chip.ChipGroup>
+
+    <TextView
+        android:id="@+id/tv_meeting_post_member_title"
+        style="@style/Text.Regular20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="70dp"
+        android:background="@drawable/background_text_title"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:text="@string/meeting_post_member"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/chipGroup2" />
+
+    <TextView
+        android:id="@+id/tv_meeting_post_category_max_member"
+        style="@style/Text.Input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/background_button"
+        android:padding="10dp"
+        android:text="모집 인원"
+        app:layout_constraintStart_toStartOf="@id/tv_meeting_post_category_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_meeting_post_member_title" />
+
+    <Spinner
+        android:id="@+id/spinner_max_member"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/background_spinner"
+        app:layout_constraintBottom_toBottomOf="@id/tv_meeting_post_category_max_member"
+        app:layout_constraintStart_toEndOf="@id/tv_meeting_post_category_min_traveler"
+        app:layout_constraintTop_toTopOf="@id/tv_meeting_post_category_max_member" />
+
+    <TextView
+        android:id="@+id/tv_meeting_post_category_min_traveler"
+        style="@style/Text.Input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/background_button"
+        android:padding="10dp"
+        android:text="여행자 최소인원"
+        app:layout_constraintStart_toStartOf="@id/tv_meeting_post_category_max_member"
+        app:layout_constraintTop_toBottomOf="@id/tv_meeting_post_category_max_member" />
+
+    <Spinner
+        android:id="@+id/spinner_min_traveler"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/background_spinner"
+        app:layout_constraintBottom_toBottomOf="@id/tv_meeting_post_category_min_traveler"
+        app:layout_constraintStart_toEndOf="@id/tv_meeting_post_category_min_traveler"
+        app:layout_constraintTop_toTopOf="@id/tv_meeting_post_category_min_traveler" />
+
+    <TextView
+        android:id="@+id/tv_meeting_post_category_min_native"
+        style="@style/Text.Input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/background_button"
+        android:padding="10dp"
+        android:text="토박이 최소인원"
+        app:layout_constraintStart_toStartOf="@id/tv_meeting_post_category_min_traveler"
+        app:layout_constraintTop_toBottomOf="@id/tv_meeting_post_category_min_traveler" />
+
+    <Spinner
+        android:id="@+id/spinner_min_native"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/background_spinner"
+        app:layout_constraintBottom_toBottomOf="@id/tv_meeting_post_category_min_native"
+        app:layout_constraintStart_toEndOf="@id/tv_meeting_post_category_min_native"
+        app:layout_constraintTop_toTopOf="@id/tv_meeting_post_category_min_native" />
+
+    <Button
+        android:id="@+id/btn_meeting_post_previous"
+        style="@style/custom_material_textButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/btn_ripple_effect"
+        android:text="@string/signup_previous"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btn_meeting_post_create"
+        style="@style/custom_material_textButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/background_button_certification_ripple"
+        android:text="모임 만들기"
+        android:textSize="25sp"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

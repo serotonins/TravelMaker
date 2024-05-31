@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="black_a20">#33000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="main_color">#C3DAF8</color>
+    <color name="text_main_color">#5A6CB3</color>
+    <color name="progress_main_color">#1E80FF</color>
+    <color name="main_toolbar_divider_color">#40006FFF</color>
+    <color name="button_main_color">#C3DAF8</color>
+    <color name="light_gray">#808080</color>
+    <color name="gray_a25">#CCCCCC</color>
+    <color name="timer_red">#FA1010</color>
+    <color name="hint_color">#661d1b20</color>
+    <color name="button_text_color">#1D1B20</color>
+    <color name="second_main_color">#DDF3FF</color>
+    <color name="blue_gray">#ff21272b</color>
+</resources>

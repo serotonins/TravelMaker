@@ -1,0 +1,31 @@
+Index: app/src/main/java/com/gumibom/travelmaker/ui/main/mypage/DialogMainMypageEditMyinfo.kt
+===================================================================
+diff --git a/app/src/main/java/com/gumibom/travelmaker/ui/main/mypage/DialogMainMypageEditMyinfo.kt b/app/src/main/java/com/gumibom/travelmaker/ui/main/mypage/DialogMainMypageEditMyinfo.kt
+--- a/app/src/main/java/com/gumibom/travelmaker/ui/main/mypage/DialogMainMypageEditMyinfo.kt	
++++ b/app/src/main/java/com/gumibom/travelmaker/ui/main/mypage/DialogMainMypageEditMyinfo.kt	
+@@ -46,7 +46,7 @@
+     }
+ 
+     /*
+-    생년월일
++    생년월일 수정시 저장
+      */
+     private fun editBirthday(){
+         val datepicker = binding.dpMyinfoBirthday
+@@ -65,14 +65,14 @@
+     }
+ 
+     /*
+-    카테고리
++    카테고리 수정시 저장
+      */
+     private fun editCategory(){
+         //
+     }
+ 
+     /*
+-    돌아가기
++    마이페이지로 돌아가기
+      */
+     private fun backToMypage(){
+         //

@@ -1,0 +1,42 @@
+pipeline {
+	agent any
+	stages {
+		stage('Build') {
+			steps {
+				sh 'pwd'
+				sh 'ls -al'
+        		//프로젝트 권한 변경
+        		sh 'chmod +x ./travelmaker_backend/gradlew'
+        		//프로젝트 빌드
+        		withCredentials([string(credentialsId: 'JASYPT_KEY', variable: 'JASYPT_KEY')]) {
+        		    sh 'cd ./travelmaker_backend && ./gradlew clean build -PJASYPT_KEY=$JASYPT_KEY && ./gradlew bootJar'
+        		}
+			}
+		}
+		stage('Docker Build and Push') {
+			steps {
+				sh 'pwd'
+			    sh 'ls -al'
+				withCredentials([usernamePassword(credentialsId: 'docker-hub-path', passwordVariable: 'REPOSITORY', usernameVariable: 'USERSPACE')]) {
+                    sh 'cd ./travelmaker_backend && docker build -f Dockerfile -t $USERSPACE/$REPOSITORY .'
+				    sh 'cd ./travelmaker_backend && docker push $USERSPACE/$REPOSITORY'
+				    echo 'docker push Success!!'
+                }
+				echo 'docker push Success!!'
+			}
+		}
+		stage('Deploy') {
+			steps {
+			    sh 'pwd'
+				sshagent(credentials: ['travelmaker_ec2_server']) {
+                    withCredentials([string(credentialsId: 'ec2-server-ip', variable: 'EC2_SERVER_IP'), usernamePassword(credentialsId: 'docker-login-creds', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
+                        sh 'echo "$DOCKER_PASSWORD" | docker login -u $DOCKER_USERNAME --password-stdin'
+                        sh 'ssh -o StrictHostKeyChecking=no ubuntu@$EC2_SERVER_IP "sudo sh deploy2.sh"'
+                        sh 'pwd'
+                    }
+                }
+			}
+		}
+	}
+	    
+}

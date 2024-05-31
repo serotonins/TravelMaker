@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <Button
+        android:id="@+id/btn_my_record_traveling"
+        style="@style/Text.InTheBtn"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="130dp"
+        android:background="@drawable/background_button_certification"
+        app:backgroundTint="@null"
+        android:text="여행 중"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_my_record_travel_finish"
+        style="@style/Text.InTheBtn"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="120dp"
+        android:background="@drawable/background_button"
+        android:text="여행 완료"
+        app:backgroundTint="@null"
+        app:layout_constraintStart_toEndOf="@id/btn_my_record_traveling"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_my_record_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="좌우 스크롤로 더 많은 팜플렛을 볼 수 있어요."
+        android:textColor="@color/light_gray"
+        app:layout_constraintEnd_toEndOf="@id/btn_my_record_travel_finish"
+        app:layout_constraintTop_toBottomOf="@id/btn_my_record_travel_finish"
+        android:layout_marginTop="10dp"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_my_record"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:listitem="@layout/item_my_record"
+        app:layout_constraintTop_toBottomOf="@id/tv_my_record_description" />
+
+    <TextView
+        android:id="@+id/tv_no_record"
+        style="@style/Text.Input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:text="기록 중인 팜플렛이 없습니다."
+        android:visibility="invisible"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

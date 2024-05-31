@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_meeting_post_description"
+        style="@style/Text.Regular20.gray"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/meeting_post_description"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="@id/tv_meeting_start_title"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_meeting_start_title"
+        style="@style/Text.Regular20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/background_text_title"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:text="@string/select_start_end_date"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_meeting_post_description" />
+
+    <TextView
+        android:id="@+id/tv_meeting_start_day"
+        style="@style/Text.Input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/background_button"
+        android:padding="10dp"
+        android:text="시작 날짜"
+        app:layout_constraintStart_toStartOf="@id/tv_meeting_start_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_meeting_start_title" />
+
+    <ImageView
+        android:id="@+id/iv_meeting_post_date"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="10dp"
+        android:src="@drawable/ic_calendar"
+        android:background="@drawable/background_imageview_ripple"
+        app:layout_constraintBottom_toBottomOf="@id/tv_meeting_start_day"
+        app:layout_constraintStart_toEndOf="@id/tv_meeting_start_day"
+        app:layout_constraintTop_toTopOf="@id/tv_meeting_start_day" />
+
+    <TextView
+        android:id="@+id/tv_meeting_start_date"
+        style="@style/Text.Input"
+        android:layout_width="125dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/background_date_text"
+        android:gravity="center"
+        android:padding="10dp"
+        app:layout_constraintStart_toStartOf="@id/tv_meeting_start_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_meeting_start_day"
+        tools:text="2024.02.03" />
+
+    <TextView
+        android:id="@+id/tv_meeting_end_day"
+        style="@style/Text.Input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/background_button"
+        android:padding="10dp"
+        android:text="종료 날짜"
+        app:layout_constraintStart_toStartOf="@id/tv_meeting_deadline_time"
+        app:layout_constraintTop_toBottomOf="@id/tv_meeting_start_title" />
+
+    <ImageView
+        android:id="@+id/iv_meeting_post_end_date"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="10dp"
+        android:src="@drawable/ic_calendar"
+        android:background="@drawable/background_imageview_ripple"
+        app:layout_constraintBottom_toBottomOf="@id/tv_meeting_start_day"
+        app:layout_constraintStart_toEndOf="@id/tv_meeting_end_day"
+        app:layout_constraintTop_toTopOf="@id/tv_meeting_start_day" />
+
+    <TextView
+        android:id="@+id/tv_meeting_end_date"
+        style="@style/Text.Input"
+        android:layout_width="125dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/background_date_text"
+        android:gravity="center"
+        android:padding="10dp"
+        app:layout_constraintStart_toStartOf="@id/tv_meeting_end_day"
+        app:layout_constraintTop_toBottomOf="@id/tv_meeting_start_day"
+        tools:text="2024.02.03" />
+
+    <TextView
+        android:id="@+id/tv_meeting_deadline_title"
+        style="@style/Text.Regular20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/background_text_title"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:text="@string/select_deadline_day"
+        app:layout_constraintStart_toStartOf="@id/tv_meeting_start_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_meeting_start_date" />
+
+    <TextView
+        android:id="@+id/tv_meeting_deadline_day"
+        style="@style/Text.Input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/background_button"
+        android:padding="10dp"
+        android:text="모집 마감 날짜"
+        app:layout_constraintStart_toStartOf="@id/tv_meeting_deadline_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_meeting_deadline_title" />
+
+    <ImageView
+        android:id="@+id/iv_meeting_post_deadline"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/background_imageview_ripple"
+        android:src="@drawable/ic_calendar"
+        app:layout_constraintBottom_toBottomOf="@id/tv_meeting_deadline_day"
+        app:layout_constraintStart_toEndOf="@id/tv_meeting_deadline_day"
+        app:layout_constraintTop_toTopOf="@id/tv_meeting_deadline_day" />
+
+    <TextView
+        android:id="@+id/tv_meeting_deadline_date"
+        style="@style/Text.Input"
+        android:layout_width="125dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/background_date_text"
+        android:gravity="center"
+        android:padding="10dp"
+        app:layout_constraintStart_toStartOf="@id/tv_meeting_deadline_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_meeting_deadline_day"
+        tools:text="2024.02.03" />
+
+    <TextView
+        android:id="@+id/tv_meeting_deadline_time"
+        style="@style/Text.Input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/background_button"
+        android:padding="10dp"
+        android:text="모집 마감 시간"
+        app:layout_constraintStart_toEndOf="@id/iv_meeting_post_deadline"
+        app:layout_constraintTop_toTopOf="@id/tv_meeting_deadline_day" />
+
+    <ImageView
+        android:id="@+id/iv_meeting_post_deadline_clock"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/background_imageview_ripple"
+        android:src="@drawable/ic_clock"
+        app:layout_constraintBottom_toBottomOf="@id/tv_meeting_deadline_time"
+        app:layout_constraintStart_toEndOf="@id/tv_meeting_deadline_time"
+        app:layout_constraintTop_toTopOf="@id/tv_meeting_deadline_time" />
+
+    <TextView
+        android:id="@+id/tv_meeting_deadline_clock"
+        style="@style/Text.Input"
+        android:layout_width="125dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/background_date_text"
+        android:gravity="center"
+        android:padding="10dp"
+        app:layout_constraintStart_toStartOf="@id/tv_meeting_deadline_time"
+        app:layout_constraintTop_toBottomOf="@id/tv_meeting_deadline_time"
+        tools:text="오후 5시 18분" />
+
+    <TextView
+        android:id="@+id/tv_meeting_post_place"
+        style="@style/Text.Regular20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/background_text_title"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:text="장소 선택"
+        app:layout_constraintStart_toStartOf="@id/tv_meeting_start_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_meeting_deadline_date" />
+
+    <ImageView
+        android:id="@+id/iv_meeting_post_search"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/background_imageview_ripple"
+        android:src="@drawable/ic_location_marker"
+        app:layout_constraintBottom_toBottomOf="@id/tv_meeting_post_place"
+        app:layout_constraintStart_toEndOf="@id/tv_meeting_post_place"
+        app:layout_constraintTop_toTopOf="@id/tv_meeting_post_place" />
+
+    <TextView
+        android:id="@+id/tv_meeting_post_address"
+        style="@style/Text.Regular20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/background_button"
+        android:padding="10dp"
+        app:layout_constraintStart_toStartOf="@id/tv_meeting_post_place"
+        app:layout_constraintTop_toBottomOf="@id/tv_meeting_post_place"
+        android:visibility="gone"
+        tools:text="삼성전자 구미" />
+
+    <Button
+        android:id="@+id/btn_meeting_post_next"
+        style="@style/custom_material_textButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_ripple_effect"
+        android:text="@string/signup_next"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

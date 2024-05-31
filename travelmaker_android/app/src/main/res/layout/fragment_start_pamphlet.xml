@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/tv_pamphlet_category"
+        style="@style/Text.Regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:gravity="center"
+        android:text="여행 카테고리를 골라주세요."
+        android:lineSpacingExtra="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroup1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:chipSpacingHorizontal="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_pamphlet_category">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_taste"
+            style="@style/chipRegular"
+            android:text="@string/sign_chip_taste" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_healing"
+            style="@style/chipRegular"
+            android:text="@string/sign_chip_healing" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_culture"
+            style="@style/chipRegular"
+            android:text="@string/sign_chip_culture" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_shopping"
+            style="@style/chipRegular"
+            android:text="@string/sign_chip_shopping" />
+    </com.google.android.material.chip.ChipGroup>
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroup2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:chipSpacingHorizontal="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chipGroup1">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_active"
+            style="@style/chipRegular"
+            android:text="@string/sign_chip_active" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_picture"
+            style="@style/chipRegular"
+            android:text="@string/sign_chip_picture" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_nature"
+            style="@style/chipRegular"
+            android:text="@string/sign_chip_nature" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_rest"
+            style="@style/chipRegular"
+            android:text="@string/chip_rest" />
+
+    </com.google.android.material.chip.ChipGroup>
+
+    <Button
+        android:id="@+id/btn_personal_pamphlet"
+        style="@style/Text.InTheBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="개인 팜플렛 만들기"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/background_button_certification_ripple"
+        android:layout_marginTop="100dp" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

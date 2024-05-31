@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/tv_title_edit_myinfo"
+        android:text="@string/edit_myinfo_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="normal"
+        android:textSize="30sp"
+        app:layout_constraintVertical_bias="0.1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/tv_myinfo_birthday"
+        android:text="@string/edit_myinfo_birthday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        app:layout_constraintHorizontal_bias="0.12"
+        app:layout_constraintVertical_bias="0.2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <DatePicker
+        android:id="@+id/dp_myinfo_birthday"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:calendarViewShown="false"
+        android:datePickerMode="spinner"
+        app:layout_constraintHorizontal_bias="0.68"
+        app:layout_constraintVertical_bias="0.33"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <Button
+        android:id="@+id/btn_update_birthday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/dp_myinfo_birthday"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="수정하기"
+        style="@style/Widget.Material3.Button.TextButton"
+        android:layout_marginEnd="32dp"
+        />
+
+    <TextView
+        android:id="@+id/tv_myinfo_categories"
+        android:text="@string/edit_myinfo_categories"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        app:layout_constraintHorizontal_bias="0.12"
+        app:layout_constraintVertical_bias="0.55"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <!--
+      맛집(taste), 힐링(healing), 문화(culture)
+      활동(active), 사진(picture), 자연(nature)  -->
+    <!-- Example Chip 2 -->
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroup1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:chipSpacingHorizontal="20dp"
+
+        app:layout_constraintVertical_bias="0.65"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_taste"
+            style="@style/chipRegular"
+            android:text="@string/sign_chip_taste" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_healing"
+            style="@style/chipRegular"
+            android:text="@string/sign_chip_healing" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_culture"
+            style="@style/chipRegular"
+            android:text="@string/sign_chip_culture" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_shopping"
+            style="@style/chipRegular"
+            android:text="@string/sign_chip_shopping" />
+    </com.google.android.material.chip.ChipGroup>
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroup2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:chipSpacingHorizontal="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chipGroup1">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_active"
+            style="@style/chipRegular"
+            android:text="@string/sign_chip_active" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_picture"
+            style="@style/chipRegular"
+            android:text="@string/sign_chip_picture" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_nature"
+            style="@style/chipRegular"
+            android:text="@string/sign_chip_nature" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_rest"
+            style="@style/chipRegular"
+            android:text="@string/chip_rest" />
+
+    </com.google.android.material.chip.ChipGroup>
+
+    <Button
+        android:id="@+id/btn_update_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/chipGroup1"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="수정하기"
+        style="@style/Widget.Material3.Button.TextButton"
+        android:layout_marginEnd="32dp"
+        />
+
+
+    <Button
+        android:id="@+id/btn_return_to_mypage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="@string/return_to_mypage"
+        app:layout_constraintHorizontal_bias="0.3"
+        app:layout_constraintVertical_bias="0.9"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <Button
+        android:id="@+id/btn_delete_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Widget.Material3.Button.TextButton"
+        android:text="@string/delete_my_account"
+        android:textStyle="bold"
+        android:textColor="@color/light_gray"
+        app:layout_constraintHorizontal_bias="0.7"
+        app:layout_constraintVertical_bias="0.9"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

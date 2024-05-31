@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/tv_pamphlet_welcome"
+        style="@style/Text.Regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="200dp"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        android:lineSpacingExtra="10dp"
+        android:text="@string/pamplet_welcome"/>
+
+    <Button
+        android:id="@+id/btn_personal_pamphlet"
+        style="@style/Text.InTheBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="개인 팜플렛 만들기"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/tv_pamphlet_welcome"
+        android:background="@drawable/background_button_certification_ripple"
+        android:layout_marginTop="100dp"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

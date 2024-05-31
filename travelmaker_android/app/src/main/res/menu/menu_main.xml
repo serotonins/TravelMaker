@@ -1,0 +1,21 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+<!--    <item-->
+<!--        android:id="@+id/action_main_icon"-->
+<!--        android:title="Settings"-->
+<!--        app:actionLayout = "@layout/toolbar_main_app_icon"-->
+<!--        app:showAsAction="always" />-->
+    <item
+        android:id="@+id/action_notify"
+        android:title="Settings"
+        android:icon="@drawable/ic_toolbar_notify_24"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_my_page"
+        android:title="Mypage"
+        app:showAsAction="always"
+        android:enabled="true"
+        app:actionLayout="@layout/toolbar_my_page_image" />
+
+</menu>

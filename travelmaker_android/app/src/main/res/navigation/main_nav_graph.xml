@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/mainFragment">
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.gumibom.travelmaker.ui.main.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_mainMyGroupFragment"
+            app:destination="@id/mainMyGroupFragment" />
+        <action
+
+            android:id="@+id/action_mainFragment_to_mainGoTravelFragment"
+            app:destination="@id/mainGoTravelFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_mainMyRecordFragment"
+            app:destination="@id/mainMyRecordFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_mainLookPamphletsFragment"
+            app:destination="@id/mainLookPamphletsFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_mainMyPageFragment"
+            app:destination="@id/mainMyPageFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_mainNotificationFragment"
+            app:destination="@id/mainNotificationFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/mainFindMateDetailFragment"
+        android:name="com.gumibom.travelmaker.ui.main.findmate.bottomsheet.MainFindMateDetailFragment"
+        android:label="fragment_main_find_mate_detail"
+        tools:layout="@layout/fragment_main_find_mate_detail" />
+
+    <fragment
+        android:id="@+id/mainMyGroupFragment"
+        android:name="com.gumibom.travelmaker.ui.main.mygroup.MainMyGroupFragment"
+        android:label="fragment_main_my_group"
+        tools:layout="@layout/fragment_main_my_group" >
+        <action
+            android:id="@+id/action_mainMyGroupFragment_to_mainGroupChattingFragment"
+            app:destination="@id/mainGroupChattingFragment" />
+    </fragment>
+    <fragment
+
+        android:id="@+id/mainMyRecordFragment"
+        android:name="com.gumibom.travelmaker.ui.main.myrecord.MainMyRecordFragment"
+        android:label="fragment_main_my_record"
+        tools:layout="@layout/fragment_main_my_record" >
+        <action
+            android:id="@+id/action_mainMyRecordFragment_to_myRecordDetail"
+            app:destination="@id/myRecordDetail" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainGoTravelFragment"
+        android:name="com.gumibom.travelmaker.ui.main.gotravel.MainGoTravelFragment"
+        android:label="fragment_main_go_travel">
+        <action
+            android:id="@+id/action_mainGoTravelFragment_to_makePamphletFragment"
+            app:destination="@id/makePamphletFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainLookPamphletsFragment"
+        android:name="com.gumibom.travelmaker.ui.main.lookpamphlets.MainLookPamphletsFragment"
+        android:label="fragment_main_look_pamphlets"
+        tools:layout="@layout/fragment_pamphlet" >
+        <action
+            android:id="@+id/action_mainLookPamphletsFragment_to_pamphletDetailFragment"
+            app:destination="@id/pamphletDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/makePamphletFragment"
+        android:name="com.gumibom.travelmaker.ui.main.gotravel.MakePamphletFragment"
+        android:label="MakePamphletFragment" >
+        <action
+            android:id="@+id/action_makePamphletFragment_to_startPamphletFragment"
+            app:destination="@id/startPamphletFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/startPamphletFragment"
+        android:name="com.gumibom.travelmaker.ui.main.gotravel.StartPamphletFragment"
+        android:label="StartPamphletFragment" >
+        <action
+            android:id="@+id/action_startPamphletFragment_to_mainMyRecordFragment"
+            app:destination="@id/mainMyRecordFragment"
+            app:popUpTo="@id/mainGoTravelFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/mainMyPageFragment"
+        android:name="com.gumibom.travelmaker.ui.main.mypage.MainMyPageFragment"
+        android:label="MainMyPageFragment" >
+        <action
+            android:id="@+id/action_mainMyPageFragment_to_dialogMainMypageEditMyinfo"
+            app:destination="@id/dialogMainMypageEditMyinfo" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainNotificationFragment"
+        android:name="com.gumibom.travelmaker.ui.main.notification.MainNotificationFragment"
+        android:label="fragment_main_notification"
+        tools:layout="@layout/fragment_main_notification" />
+    <fragment
+        android:id="@+id/myRecordDetail"
+        android:name="com.gumibom.travelmaker.ui.main.myrecord.detail.MyRecordDetailFragment"
+        android:label="MyRecordDetail" >
+        <action
+            android:id="@+id/action_myRecordDetail_to_makeMyRecordPictureFragment"
+            app:destination="@id/makeMyRecordPictureFragment" />
+        <action
+            android:id="@+id/action_myRecordDetail_to_makeMyRecordVideoFragment"
+            app:destination="@id/makeMyRecordVideoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/makeMyRecordPictureFragment"
+        android:name="com.gumibom.travelmaker.ui.main.myrecord.createRecord.MakeMyRecordPictureFragment"
+        android:label="MakeMyRecordPictureFragment" />
+    <fragment
+        android:id="@+id/makeMyRecordVideoFragment"
+        android:name="com.gumibom.travelmaker.ui.main.myrecord.createRecord.MakeMyRecordVideoFragment"
+        android:label="MakeMyRecordVideoFragment" />
+    <fragment
+        android:id="@+id/dialogMainMypageEditMyinfo"
+        android:name="com.gumibom.travelmaker.ui.main.mypage.DialogMainMypageEditMyinfo"
+        android:label="DialogMainMypageEditMyinfo" />
+    <fragment
+        android:id="@+id/pamphletDetailFragment"
+        android:name="com.gumibom.travelmaker.ui.main.lookpamphlets.detail.PamphletDetailFragment"
+        android:label="PamphletDetailFragment" />
+    <fragment
+        android:id="@+id/mainGroupChattingFragment"
+        android:name="com.gumibom.travelmaker.ui.main.mygroup.MainGroupChattingFragment"
+        android:label="fragment_main_group_chatting"
+        tools:layout="@layout/fragment_main_group_chatting" />
+</navigation>

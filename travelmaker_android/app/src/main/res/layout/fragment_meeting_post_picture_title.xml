@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+        android:id="@+id/tv_meeting_post_picture_title"
+        style="@style/Text.Regular20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="70dp"
+        android:background="@drawable/background_text_title"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:text="@string/meeting_picture_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_meeting_post_picture_description"
+        style="@style/Text.Regular20.gray"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/meeting_picture_description"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="@id/tv_meeting_post_picture_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_meeting_post_picture_title" />
+    
+    <HorizontalScrollView
+        android:id="@+id/scroll_meeting_post_picture"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_meeting_post_picture_description"
+        app:layout_constraintStart_toStartOf="@id/tv_meeting_post_picture_description">
+
+        <RelativeLayout
+            android:id="@+id/layout_picture"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_meeting_post_picture"
+                android:layout_width="wrap_content"
+                android:layout_height="150dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="1"
+                tools:listitem="@layout/item_meeting_post_picture" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_picture_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:layout_toEndOf="@id/rv_meeting_post_picture">
+
+                <ImageButton
+                    android:id="@+id/btn_picture_add"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:clickable="true"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:background="@drawable/background_imageview_picture" />
+
+                <ImageView
+                    android:id="@+id/iv_picture_add"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:clickable="true"
+                    app:layout_constraintStart_toStartOf="@id/btn_picture_add"
+                    app:layout_constraintEnd_toEndOf="@id/btn_picture_add"
+                    app:layout_constraintTop_toTopOf="@id/btn_picture_add"
+                    app:layout_constraintBottom_toBottomOf="@id/btn_picture_add"
+                    android:src="@drawable/ic_picture_add"
+                    />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </RelativeLayout>
+
+    </HorizontalScrollView>
+
+
+
+    <TextView
+        android:id="@+id/tv_meeting_post_content_title"
+        style="@style/Text.Regular20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/background_text_title"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:text="제목과 내용을 입력해주세요."
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/scroll_meeting_post_picture" />
+
+    <EditText
+        android:id="@+id/et_meeting_post_picture_title"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/background_edittext_radius8"
+        android:hint="제목을 입력해주세요."
+        android:padding="10dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_meeting_post_content_title" />
+
+    <EditText
+        android:id="@+id/et_meeting_post_picture_content"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/background_edittext_radius8"
+        android:hint="내용을 입력해주세요."
+        android:padding="10dp"
+        app:layout_constraintTop_toBottomOf="@id/et_meeting_post_picture_title" />
+
+    <Button
+        android:id="@+id/btn_meeting_post_next"
+        style="@style/custom_material_textButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/btn_ripple_effect"
+        android:text="@string/signup_next"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/btn_meeting_post_previous"
+        style="@style/custom_material_textButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/btn_ripple_effect"
+        android:text="@string/signup_previous"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

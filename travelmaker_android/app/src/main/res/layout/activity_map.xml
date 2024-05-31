@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <fragment
+            android:id="@+id/google_map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <Button
+            android:id="@+id/btn_find_mate_place"
+            style="@style/Text.Regular20"
+            android:layout_width="371dp"
+            android:layout_height="56dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/background_button_certification_ripple"
+            android:text="@string/find_mate_another_search"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <HorizontalScrollView
+            android:id="@+id/scroll_map_chip"
+            style="@style/CustomScrollbarHorizontalScrollView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_find_mate_place">
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroup_map"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:paddingStart="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/et_find_mate_location">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_map_taste"
+                    style="@style/chipRegular"
+                    android:text="@string/sign_chip_taste" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_map_healing"
+                    style="@style/chipRegular"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/sign_chip_healing" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_map_culture"
+                    style="@style/chipRegular"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/sign_chip_culture" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_map_active"
+                    style="@style/chipRegular"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/sign_chip_active" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_map_picture"
+                    style="@style/chipRegular"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/sign_chip_picture" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_map_nature"
+                    style="@style/chipRegular"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/sign_chip_nature" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_shopping"
+                    style="@style/chipRegular"
+                    android:text="@string/sign_chip_shopping"
+                    android:layout_marginStart="10dp" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_rest"
+                    style="@style/chipRegular"
+                    android:text="@string/chip_rest"
+                    android:layout_marginStart="10dp" />
+
+            </com.google.android.material.chip.ChipGroup>
+
+        </HorizontalScrollView>
+
+        <ImageView
+            android:id="@+id/iv_map_filtering"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/ic_filtering"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="@drawable/background_imageview_ripple"
+            app:layout_constraintStart_toStartOf="@id/btn_find_mate_place"
+            app:layout_constraintTop_toBottomOf="@id/scroll_map_chip" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_map_meeting_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            app:srcCompat="@drawable/ic_edit"
+            app:backgroundTint="#C3DAF8"
+            app:maxImageSize="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="50dp"
+            app:elevation="6dp"
+            app:pressedTranslationZ="12dp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <include
+        android:id="@+id/bts"
+        layout="@layout/fragment_main_find_mate_detail"/>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

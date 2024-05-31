@@ -1,0 +1,6 @@
+<!-- res/drawable/scrollbar_custom.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/main_color"/> <!-- 원하는 색상 코드로 변경 -->
+    <corners android:radius="2dp"/> <!-- 스크롤바 모서리의 둥근 정도를 설정 -->
+    <size android:width="4dp"/> <!-- 스크롤바의 너비를 설정 -->
+</shape>

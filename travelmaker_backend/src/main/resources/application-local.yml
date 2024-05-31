@@ -1,0 +1,63 @@
+## 로컬 개발 환경
+
+spring:
+  application:
+    name: travelmaker-local
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQLDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+        # 페이징 +컬렉션 조회 최적화 (쓰는 이유를 알고,웬만하면 해당 옵션을 켜놓자)
+        # in 쿼리의 개수를 설정
+        default_batch_fetch_size: 100
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ENC(T+t/J9bKTHnCGeP/jFP1mA==)
+    password: ENC(WvjVw6nWFMuQSP2h5WSqQQ==)
+    url: ENC(02uo3zxNIx+bygjXsHf9bfhvLK+CH/GJlpe/cphVSe/iT+y9WsaUtMdnujTYtnHO6u8cNZBQ8TBpOmB3NAC0ARx8OKfTip6zgObmbzjQLxo=)
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+
+server:
+  port: 8080
+
+cloud:
+  aws:
+    s3:
+      bucket: ENC(Y4/w6+PLIdoUTI9TcQf7/echDgJEldvj3uF8hXTHGqw=)
+    credentials:
+      access-key: ENC(d+zPWsAtzmUL8Ve0cxpeoGulXzgyrIsDzONSCglQAXo=)
+      secret-key: ENC(7UzrnKPq0ZAolzrPxTRNC9tcbw0ETQzyrKDS5454M0YjOtPzVQOJQjqLPZbNSTLXzWDnLDyZq4o=)
+    region:
+      static: ap-northeast-2
+      auto: false
+    stack:
+      auto: false
+
+coolsms:
+  api:
+    key: ENC(BWNDQzGNvNMVFZOeaSbbR3zNcPlN4lz/hyHtobQPCS0=)
+    secret: ENC(Da7l7zpS5Ccm4OaZ9P2mFwkvD9ufexFg6ZIMlRXPlUTbksGzH4XDeIyVtr1Wagiu)
+    fromnumber : ENC(j2aEYLecCVWNIFo2pKulY89/JC2MJlmd)
+
+redis:
+  host: localhost
+  port: 6379
+  repositories:
+    enabled: false
+
+#ffmpeg:
+#  main:
+#    location: /ffmpeg/ffmpeg.exe
+#  probe:
+#    location: /ffmpeg/ffprobe.exe
+
+jwt:
+  secret: ENC(iD/4Lj32YZAdHtLBznMbfeW9ugCbJ/wIhartzsBpSghIamYs5cA1yafvo7DVuTGKVijW7gF0RjSuFj/7oEBv6qY+47KgsAhuhpnCTjPZau0=)

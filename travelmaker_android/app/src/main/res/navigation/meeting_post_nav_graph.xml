@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/meeting_post_nav_graph"
+    app:startDestination="@id/meetingPostDateFragment">
+
+    <fragment
+        android:id="@+id/meetingPostDateFragment"
+        android:name="com.gumibom.travelmaker.ui.main.findmate.meeting_post.MeetingPostDateFragment"
+        android:label="MeetingPostDateFragment" >
+        <action
+            android:id="@+id/action_meetingPostDateFragment_to_meetingPostPictureFragment"
+            app:destination="@id/meetingPostPictureFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/meetingPostPictureFragment"
+        android:name="com.gumibom.travelmaker.ui.main.findmate.meeting_post.MeetingPostPictureFragment"
+        android:label="MeetingPostPictureFragment" >
+        <action
+            android:id="@+id/action_meetingPostPictureFragment_to_meetingPostCategoryFragment"
+            app:destination="@id/meetingPostCategoryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/meetingPostCategoryFragment"
+        android:name="com.gumibom.travelmaker.ui.main.findmate.meeting_post.MeetingPostCategoryFragment"
+        android:label="MeetingPostCategoryFragment" />
+</navigation>

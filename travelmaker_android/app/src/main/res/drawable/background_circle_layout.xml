@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/light_gray"/> <!-- 원의 색상을 빨간색으로 설정 -->
+    <size
+        android:width="200dp"
+        android:height="200dp"/>
+</shape>

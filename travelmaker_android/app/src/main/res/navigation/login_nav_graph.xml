@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/login_nav_graph"
+
+    app:startDestination="@id/loginFragment2">
+
+
+    <fragment
+        android:id="@+id/loginFragment2"
+        android:name="com.gumibom.travelmaker.ui.login.LoginFragment"
+        android:label="LoginFragment" >
+        <action
+            android:id="@+id/action_loginFragment2_to_findIdPwFragment"
+            app:destination="@id/findIdPwFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/findIdPwFragment"
+        android:name="com.gumibom.travelmaker.ui.login.forgetIdPw.FindIdPwFragment"
+        android:label="FindIdPwFragment" />
+
+
+</navigation>

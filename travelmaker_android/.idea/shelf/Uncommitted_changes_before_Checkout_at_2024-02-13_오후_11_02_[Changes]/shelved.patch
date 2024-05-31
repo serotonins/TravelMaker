@@ -1,0 +1,196 @@
+Index: app/src/main/java/com/gumibom/travelmaker/ui/main/findmate/meeting_post/MeetingPostPictureFragment.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.gumibom.travelmaker.ui.main.findmate.meeting_post\r\n\r\nimport android.app.Activity\r\nimport android.content.Context\r\nimport android.content.Intent\r\nimport android.content.pm.PackageManager\r\nimport android.net.Uri\r\nimport android.os.Build\r\nimport android.os.Bundle\r\nimport android.provider.MediaStore\r\nimport android.util.Log\r\nimport android.view.LayoutInflater\r\nimport android.view.View\r\nimport android.view.ViewGroup\r\nimport android.widget.Toast\r\nimport androidx.activity.OnBackPressedCallback\r\nimport androidx.activity.result.ActivityResultLauncher\r\nimport androidx.activity.result.contract.ActivityResultContracts\r\nimport androidx.core.app.ActivityCompat\r\nimport androidx.core.content.ContextCompat\r\nimport androidx.fragment.app.Fragment\r\nimport androidx.fragment.app.activityViewModels\r\nimport com.bumptech.glide.Glide\r\nimport com.gumibom.travelmaker.constant.NOT_ENOUGH_INPUT\r\nimport com.gumibom.travelmaker.databinding.FragmentMeetingPostDateBinding\r\nimport com.gumibom.travelmaker.databinding.FragmentMeetingPostPictureTitleBinding\r\nimport dagger.hilt.android.AndroidEntryPoint\r\n\r\nprivate const val TAG = \"MeetingPostPictureFragment_싸피\"\r\n@AndroidEntryPoint\r\nclass MeetingPostPictureFragment : Fragment() {\r\n\r\n    private var _binding: FragmentMeetingPostPictureTitleBinding? = null\r\n    private val binding get() = _binding!!\r\n    private lateinit var activity: MeetingPostActivity\r\n    private val meetingPostViewModel : MeetingPostViewModel by activityViewModels()\r\n\r\n    lateinit var getResult: ActivityResultLauncher<Intent>\r\n    private var filePath = \"\"\r\n    private var isNextPage = false\r\n\r\n    private lateinit var callback: OnBackPressedCallback\r\n\r\n    override fun onAttach(context: Context) {\r\n        super.onAttach(context)\r\n        activity = context as MeetingPostActivity\r\n    }\r\n\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n        // intent 결과를 받음\r\n        getResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {\r\n            if (it.resultCode == Activity.RESULT_OK) {\r\n                // contentResolver로 filePath를 받는다.\r\n                filePath = getFilePathUri(it.data?.data!!)\r\n                Log.d(TAG, \"onCreate: $filePath\")\r\n                // ViewModel LiveData에 추가\r\n                meetingPostViewModel.addImageUrl(filePath)\r\n            }\r\n        }\r\n        // OnBackPressedCallback 인스턴스 생성 및 추가\r\n        callback = object : OnBackPressedCallback(true) { // true는 콜백을 활성화 상태로 만듭니다.\r\n            override fun handleOnBackPressed() {\r\n                activity.navigateToPreviousFragment()\r\n            }\r\n        }\r\n        // OnBackPressedDispatcher에 콜백 추가\r\n        requireActivity().onBackPressedDispatcher.addCallback(this, callback)\r\n    }\r\n\r\n    override fun onCreateView(\r\n        inflater: LayoutInflater,\r\n        container: ViewGroup?,\r\n        savedInstanceState: Bundle?\r\n    ): View? {\r\n        _binding = FragmentMeetingPostPictureTitleBinding.inflate(inflater, container, false)\r\n        return binding.root\r\n    }\r\n\r\n    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {\r\n        super.onViewCreated(view, savedInstanceState)\r\n        moveNextFragment()\r\n        movePreviousFragment()\r\n\r\n        openGallery()\r\n        setAdapter()\r\n\r\n        // TODO 데이터 viewModel에 담기\r\n    }\r\n\r\n    private fun movePreviousFragment() {\r\n        binding.btnMeetingPostPrevious.setOnClickListener {\r\n            activity.navigateToPreviousFragment()\r\n        }\r\n    }\r\n\r\n    /*\r\n     * 이미지 리싸이클러뷰 초기화 하는 함수\r\n     */\r\n    private fun setAdapter() {\r\n        val adapter = MeetingPostAdapter()\r\n        binding.rvMeetingPostPicture.adapter = adapter\r\n\r\n        meetingPostViewModel.urlLiveData.observe(viewLifecycleOwner) { list ->\r\n            isNextPage = true\r\n            // 사진은 최대 3장만 올릴 수 있음\r\n            if (list.size >= 3) {\r\n                binding.layoutPictureAdd.visibility = View.GONE\r\n            }\r\n            adapter.submitList(list.toMutableList())\r\n        }\r\n    }\r\n\r\n    /*\r\n     * 다음 버튼 클릭 시 다음 화면 페이지 전환\r\n     */\r\n    private fun moveNextFragment() {\r\n        binding.btnMeetingPostNext.setOnClickListener {\r\n\r\n            val title = binding.etMeetingPostPictureTitle.text.toString()\r\n            val content = binding.etMeetingPostPictureContent.text.toString()\r\n\r\n            if (title.isNotEmpty() && content.isNotEmpty() && isNextPage) {\r\n                meetingPostViewModel.title = title\r\n                meetingPostViewModel.content = content\r\n                activity.navigateToNextFragment()\r\n            } else {\r\n                Toast.makeText(requireContext(), NOT_ENOUGH_INPUT, Toast.LENGTH_SHORT).show()\r\n            }\r\n        }\r\n    }\r\n    /*\r\n     * 버튼 클릭 시 갤러리를 여는 함수\r\n     */\r\n    private fun openGallery() {\r\n        Log.d(TAG, \"openGallery: 불렀니?\")\r\n        binding.btnPictureAdd.setOnClickListener {\r\n            if (!permissionGallery()) {\r\n                val intent  = Intent(Intent.ACTION_PICK)\r\n                intent.type = \"image/*\"\r\n                getResult.launch(intent)\r\n            }\r\n        }\r\n\r\n        binding.ivPictureAdd.setOnClickListener {\r\n            if (!permissionGallery()) {\r\n                val intent  = Intent(Intent.ACTION_PICK)\r\n                intent.type = \"image/*\"\r\n                getResult.launch(intent)\r\n            }\r\n        }\r\n    }\r\n\r\n\r\n    /**\r\n     * 파일 경로를 찾는 함수\r\n     */\r\n    private fun getFilePathUri(uri: Uri) : String{\r\n        val buildName = Build.MANUFACTURER\r\n\r\n        // 샤오미 폰은 바로 경로 반환 가능\r\n        if (buildName.equals(\"Xiaomi\")) {\r\n            return uri.path.toString()\r\n        }\r\n\r\n        var columnIndex = 0\r\n        val proj = arrayOf(MediaStore.Images.Media.DATA)\r\n        var cursor = requireActivity().contentResolver.query(uri, proj, null, null, null)\r\n\r\n        if (cursor!!.moveToFirst()){\r\n            columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)\r\n        }\r\n\r\n        return cursor.getString(columnIndex)\r\n    }\r\n\r\n    /**\r\n     * 안드로이드 SDK 33 이상일 떄와 이하일 때를 구분하여 권한 체크\r\n     */\r\n    private fun permissionGallery() : Boolean{\r\n        // 13 이상일 때\r\n        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {\r\n            val readImagePermission = ContextCompat.checkSelfPermission(requireContext(), android.Manifest.permission.READ_MEDIA_IMAGES)\r\n            val readVideoPermission = ContextCompat.checkSelfPermission(requireContext(), android.Manifest.permission.READ_MEDIA_VIDEO)\r\n\r\n            return if (readImagePermission == PackageManager.PERMISSION_DENIED || readVideoPermission == PackageManager.PERMISSION_DENIED){\r\n                ActivityCompat.requestPermissions(  // activity, permission 배열, requestCode\r\n                    activity, arrayOf(\r\n                        android.Manifest.permission.READ_MEDIA_IMAGES,\r\n                        android.Manifest.permission.READ_MEDIA_VIDEO),\r\n                    1\r\n                )\r\n                Log.d(TAG, \"permissionGallery: 여기니?\")\r\n                true\r\n            } else {\r\n                false\r\n            }\r\n        // 13 이하일 때\r\n        } else {\r\n            val writePermission = ContextCompat.checkSelfPermission(requireContext(), android.Manifest.permission.WRITE_EXTERNAL_STORAGE)\r\n            val readPermission = ContextCompat.checkSelfPermission(requireContext(), android.Manifest.permission.READ_EXTERNAL_STORAGE)\r\n\r\n            return if (writePermission == PackageManager.PERMISSION_DENIED || readPermission == PackageManager.PERMISSION_DENIED){\r\n                ActivityCompat.requestPermissions(  // activity, permission 배열, requestCode\r\n                    activity, arrayOf(\r\n                        android.Manifest.permission.WRITE_EXTERNAL_STORAGE,\r\n                        android.Manifest.permission.READ_EXTERNAL_STORAGE),\r\n                    1\r\n                )\r\n                Log.d(TAG, \"permissionGallery: 여기니?\")\r\n                true\r\n            } else {\r\n                false\r\n            }\r\n        }\r\n    }\r\n\r\n    override fun onDestroyView() {\r\n        super.onDestroyView()\r\n        _binding = null\r\n    }\r\n\r\n    override fun onDestroy() {\r\n        super.onDestroy()\r\n        callback.remove()\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/gumibom/travelmaker/ui/main/findmate/meeting_post/MeetingPostPictureFragment.kt b/app/src/main/java/com/gumibom/travelmaker/ui/main/findmate/meeting_post/MeetingPostPictureFragment.kt
+--- a/app/src/main/java/com/gumibom/travelmaker/ui/main/findmate/meeting_post/MeetingPostPictureFragment.kt	(revision 92b9b37280823a2d5036023130828b6564c7aec4)
++++ b/app/src/main/java/com/gumibom/travelmaker/ui/main/findmate/meeting_post/MeetingPostPictureFragment.kt	(date 1707727278263)
+@@ -155,7 +155,7 @@
+     /**
+      * 파일 경로를 찾는 함수
+      */
+-    private fun getFilePathUri(uri: Uri) : String{
++    private fun getFilePathUri(uri: Uri) : String{ //URI를 String으로
+         val buildName = Build.MANUFACTURER
+ 
+         // 샤오미 폰은 바로 경로 반환 가능
+Index: app/src/main/java/com/gumibom/travelmaker/data/api/signup/SignupService.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.gumibom.travelmaker.data.api.signup\r\n\r\nimport com.gumibom.travelmaker.data.dto.request.PhoneCertificationRequestDTO\r\nimport com.gumibom.travelmaker.data.dto.request.SignInUserDataRequestDTO\r\nimport com.gumibom.travelmaker.data.dto.response.IsSuccessResponseDTO\r\nimport com.gumibom.travelmaker.data.dto.response.SignInResponseDTO\r\nimport retrofit2.Response\r\nimport retrofit2.http.Body\r\nimport retrofit2.http.GET\r\nimport retrofit2.http.POST\r\nimport retrofit2.http.Path\r\nimport retrofit2.http.Query\r\n\r\ninterface SignupService {\r\n\r\n    // TODO 서버에서 보내주는 Response를 보고 구현하기\r\n    // 서버에서 휴대폰 번호를 전송하면 인증번호를 받는 api\r\n    @POST(\"/sms-certification/send\")\r\n    fun sendPhoneNumber(@Body phone : String) : Response<IsSuccessResponseDTO>\r\n\r\n    // 이 아이디가 서버에 이미 저장되어 있는지(즉, 중복된 아이디인지) 체크하는 api\r\n    // Boolean Value DTO 따로 만들어야 됨.\r\n    @GET(\"/join/check/id-exists/{loginID}\")\r\n    suspend fun checkDuplicatedId(@Path(\"loginID\") loginID : String) : Response<SignInResponseDTO>\r\n\r\n    //아이디와 비밀번호를 입력했을 때 정상적인 유저인지 확인하고 로그인 성공 메시지 발송\r\n    // 이 닉네임이 서버에 이미 저장되어 있는지(즉, 중복된 닉네임인지) 체크하는 api\r\n\r\n    @GET(\"/join/check/nickname-exists/{nickname}\")\r\n    suspend fun checkDuplicatedNickName(@Path(\"nickname\") nickname : String) : Response<SignInResponseDTO>\r\n\r\n    @POST(\"/join\")\r\n    suspend fun saveUserInfo(@Body userInfo : SignInUserDataRequestDTO) : Response<IsSuccessResponseDTO>\r\n\r\n    @POST(\"/sms-certification/confirm\")\r\n    fun isCertificationNumber(@Body phoneCertificationRequestDTO: PhoneCertificationRequestDTO) : Response<Boolean>\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/gumibom/travelmaker/data/api/signup/SignupService.kt b/app/src/main/java/com/gumibom/travelmaker/data/api/signup/SignupService.kt
+--- a/app/src/main/java/com/gumibom/travelmaker/data/api/signup/SignupService.kt	(revision 92b9b37280823a2d5036023130828b6564c7aec4)
++++ b/app/src/main/java/com/gumibom/travelmaker/data/api/signup/SignupService.kt	(date 1707727999311)
+@@ -35,4 +35,7 @@
+     @POST("/sms-certification/confirm")
+     fun isCertificationNumber(@Body phoneCertificationRequestDTO: PhoneCertificationRequestDTO) : Response<Boolean>
+ 
++
++
++
+ }
+\ No newline at end of file
+Index: app/src/main/java/com/gumibom/travelmaker/ui/signup/profile/SignupProfileFragment.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.gumibom.travelmaker.ui.signup.profile\r\n\r\nimport android.app.Activity\r\nimport android.content.Context\r\nimport android.content.Intent\r\nimport android.graphics.Bitmap\r\nimport android.os.Bundle\r\nimport android.provider.MediaStore\r\nimport android.util.Log\r\nimport android.view.LayoutInflater\r\nimport android.view.RoundedCorner\r\nimport android.view.View\r\nimport android.view.ViewGroup\r\nimport android.widget.Toast\r\nimport androidx.fragment.app.Fragment\r\nimport androidx.fragment.app.viewModels\r\nimport com.bumptech.glide.Glide\r\nimport com.bumptech.glide.load.resource.bitmap.CenterCrop\r\nimport com.bumptech.glide.load.resource.bitmap.RoundedCorners\r\nimport com.bumptech.glide.request.RequestOptions\r\nimport com.google.android.material.chip.Chip\r\nimport com.google.android.material.chip.ChipGroup\r\nimport com.gumibom.travelmaker.R\r\nimport com.gumibom.travelmaker.databinding.FragmentSignupProfileBinding\r\nimport com.gumibom.travelmaker.ui.dialog.ClickEventDialog\r\nimport com.gumibom.travelmaker.ui.signup.SignupActivity\r\nimport com.gumibom.travelmaker.ui.signup.SignupViewModel\r\nimport dagger.hilt.android.AndroidEntryPoint\r\n\r\nprivate const val TAG = \"SignupProfileFragment\"\r\n@AndroidEntryPoint\r\nclass SignupProfileFragment : Fragment() {\r\n    private val imagePickCode = 1000\r\n    private val permissionCode = 1001\r\n    private val cameraRequestCode = 1002\r\n    private var profileFlag = false;\r\n    private var _binding : FragmentSignupProfileBinding? = null\r\n    private val binding get() = _binding!!\r\n    private lateinit var signupActivity: SignupActivity\r\n    private val signupViewModel: SignupViewModel by viewModels()\r\n    override fun onAttach(context: Context) {\r\n        super.onAttach(context)\r\n        Log.d(TAG, \"onAttach:11 \")\r\n        //Activity 연결\r\n        signupActivity = context as SignupActivity\r\n    }\r\n    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {\r\n        super.onViewCreated(view, savedInstanceState)\r\n        selectCategory()\r\n        selectPicture()\r\n        observeViewModel()\r\n        backAndNextNaviBtn()\r\n\r\n        // 회원가입 완료 버튼을 누를 때 sharedPreference에 email이 null이 아니면 저장\r\n    }\r\n    private fun backAndNextNaviBtn(){\r\n        binding.tvSignupLocationPrevious.setOnClickListener {\r\n            signupActivity.navigateToPreviousFragment()\r\n        }\r\n        binding.tvSignupLocationNext.setOnClickListener {//완료 버튼 눌렀을 때\r\n\r\n            signupViewModel.saveUserInfoSaveProfileCategory(\"MultiImage로 변환하기 \",selectedChipName)\r\n            signupViewModel.saveUserInfoAllData()//DTO 통신\r\n            //서버에 정상적으로 저장이 되면 ObserViewModel에서 isSignup값이 전환되고 자동으로 페이지가 넘어간다.\r\n        }\r\n    }\r\n    private fun observeViewModel() {\r\n        signupViewModel.isSignup.observe(viewLifecycleOwner){\r\n            if (it.isSuccess){//회원가입이 성공했다면? 화면전환\r\n                signupActivity.navigateToNextFragment()\r\n            }else{\r\n                Toast.makeText(activity, \"회원가입을 실패했습니다. \", Toast.LENGTH_SHORT).show()\r\n            }\r\n        }\r\n//        signupViewModel.favoriteList.observe(viewLifecycleOwner) { favoriteList ->\r\n//            Log.d(TAG, \"observeViewModel: ${favoriteList.toList()}\")\r\n//        }\r\n        //1. viewModel에서 리스트로 받고 옵저버로 실시간 갱신\r\n        //2. 엘범 플래그는 구지? viewModel로 안빼도 될 듯\r\n        //3. 두 값이 체크 됐을 때 다음버튼 활성화\r\n    }\r\n    private fun selectPicture(){\r\n        //+버튼 클릭 시\r\n        binding.ivProfileAdd.setOnClickListener {\r\n            //사진 엘범이 열려야 됨,\r\n            val pictureDialog = ClickEventDialog(signupActivity)\r\n            pictureDialog.setTitle(\"사진 선택 유형을 선택해주세요.\")\r\n            pictureDialog.setContent(\"\")\r\n            val pictureDialogItems = arrayOf( \"엘범에서 선택\",\"카메라 촬영\",\"사진 삭제\")\r\n            pictureDialog.setItems(pictureDialogItems) { _, which ->\r\n                when (which) {\r\n                    0 -> choosePhotoFromGallery()\r\n                    1 -> takePhotoFromCamera()\r\n                    2 -> deletePhotoFromProfile()\r\n                }\r\n            }\r\n            if (profileFlag){\r\n                binding.tvSignupLocationNext.isEnabled = true\r\n            }else{\r\n                binding.tvSignupLocationNext.isEnabled = false\r\n            }\r\n\r\n            //권한 체크\r\n            Log.d(TAG, \"selectPicture: GHDGDG\")\r\n//            dispatchTakePicture()\r\n            pictureDialog.show()\r\n//            pictureDialog.clickDialogShow()\r\n            Log.d(TAG, \"selectPicture: GHDGDG2222\")\r\n        }\r\n    }\r\n\r\n\r\n    private fun deletePhotoFromProfile() {\r\n        profileFlag = false\r\n        binding.ivProfile.setBackgroundResource(R.drawable.ic_empty_profile_circle)\r\n        binding.ivProfile.setImageResource(R.drawable.ic_empty_profile_circle)\r\n    }\r\n\r\n    private fun choosePhotoFromGallery() {\r\n        val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)\r\n        startActivityForResult(galleryIntent, imagePickCode)\r\n        profileFlag = true;\r\n    }\r\n    private fun takePhotoFromCamera() {\r\n        //권한을 설정하기\r\n        val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)\r\n        startActivityForResult(cameraIntent, cameraRequestCode)\r\n        profileFlag = true\r\n    }\r\n    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {\r\n        super.onActivityResult(requestCode, resultCode, data)\r\n        if (resultCode == Activity.RESULT_OK) {\r\n            when (requestCode) {\r\n                imagePickCode -> {\r\n                    data?.data?.let { uri ->\r\n                        Glide.with(this)\r\n                            .load(uri)\r\n                            .transform(CenterCrop()) // Apply center crop to maintain aspect ratio\r\n                            .transform(CenterCrop()) // Apply center crop to maintain aspect ratio\r\n                            .into(binding.ivProfile)\r\n                    }\r\n                }\r\n                cameraRequestCode -> {\r\n                    val thumbnail = data?.extras?.get(\"data\") as? Bitmap\r\n                    thumbnail?.let {\r\n                        Glide.with(this)\r\n                            .load(it)\r\n                            .apply(RequestOptions.bitmapTransform(RoundedCorners(100)))\r\n                            .transform(CenterCrop()) // Apply center crop to maintain aspect ratio\r\n                            .into(binding.ivProfile)\r\n                    }\r\n                }\r\n            }\r\n        }else{\r\n            Log.d(TAG, \"onActivityResult: \")\r\n        }\r\n    }\r\n    private lateinit var selectedChip:MutableList<Int>\r\n    private lateinit var selectedChipName : MutableList<String>\r\n    private fun selectCategory(){\r\n        val chipGroup: ChipGroup = binding.chipGroup1\r\n        Log.d(TAG, \"selectCategory:1\")\r\n        chipGroup.setOnCheckedStateChangeListener {\r\n                group, checkId ->\r\n            selectedChip= checkId;\r\n            Log.d(TAG, \"selectCategory: ${selectedChip}\")\r\n\r\n            if (selectedChip != null) {\r\n                for (token  in selectedChip){ // 다 선택 됐고 다음 버튼을 눌렀을 때 현재 담아 있떤 리스트값들을 for문을 돌면서 유저 카테고리에 저장.\r\n                    val selectedChipId = token //\r\n                    val selctedName = group.findViewById<Chip>(selectedChipId)\r\n                    selectedChipName.add(selctedName.text.toString())\r\n                    Log.d(TAG, \"Selected Chip ID: $selectedChipId, Text: $selectedChip\")\r\n                    Log.d(TAG, \"selctedName: ${selctedName.text.toString()}, Text: ${selctedName.id.toString()}\")\r\n                }\r\n            }\r\n            //모든 칩들의 공통 특성 선택\r\n        }\r\n    }\r\n\r\n\r\n    override fun onCreateView(\r\n        inflater: LayoutInflater, container: ViewGroup?,\r\n        savedInstanceState: Bundle?\r\n    ): View? {\r\n        _binding = FragmentSignupProfileBinding.inflate(inflater, container, false)\r\n        return binding.root\r\n        //inflater.inflate(R.layout.fragment_profile_signup, container, false)\r\n    }\r\n    override fun onDestroyView() {\r\n        super.onDestroyView()\r\n        _binding= null\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/gumibom/travelmaker/ui/signup/profile/SignupProfileFragment.kt b/app/src/main/java/com/gumibom/travelmaker/ui/signup/profile/SignupProfileFragment.kt
+--- a/app/src/main/java/com/gumibom/travelmaker/ui/signup/profile/SignupProfileFragment.kt	(revision 92b9b37280823a2d5036023130828b6564c7aec4)
++++ b/app/src/main/java/com/gumibom/travelmaker/ui/signup/profile/SignupProfileFragment.kt	(date 1707727278274)
+@@ -4,6 +4,8 @@
+ import android.content.Context
+ import android.content.Intent
+ import android.graphics.Bitmap
++import android.net.Uri
++import android.os.Build
+ import android.os.Bundle
+ import android.provider.MediaStore
+ import android.util.Log
+@@ -26,6 +28,8 @@
+ import com.gumibom.travelmaker.ui.signup.SignupActivity
+ import com.gumibom.travelmaker.ui.signup.SignupViewModel
+ import dagger.hilt.android.AndroidEntryPoint
++import java.io.File
++import java.io.FileOutputStream
+ 
+ private const val TAG = "SignupProfileFragment"
+ @AndroidEntryPoint
+@@ -46,11 +50,15 @@
+     }
+     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+         super.onViewCreated(view, savedInstanceState)
+-        selectCategory()
++
++        selectedChipName = mutableListOf()
++
++        selectCategoryFirst()
++        selectCategorySecond()
++
+         selectPicture()
+         observeViewModel()
+         backAndNextNaviBtn()
+-
+         // 회원가입 완료 버튼을 누를 때 sharedPreference에 email이 null이 아니면 저장
+     }
+     private fun backAndNextNaviBtn(){
+@@ -127,11 +135,53 @@
+         startActivityForResult(cameraIntent, cameraRequestCode)
+         profileFlag = true
+     }
++    private fun getAbsolute(bitmap: Bitmap){
++        // bitmap을 절대 경로 파일에 저장
++        val timestamp = System.currentTimeMillis()  // 중복을 피하기 위해 현재 시간을 넣어줌
++        val thumbnailFileName = "thumbnail_$timestamp.jpg"
++
++        val thumbnailFile = File(requireContext().cacheDir, thumbnailFileName) /**.절대 로하면
++         절대 값 주소나오니까 그걸 저장해뒀다가 유저데이터에 담아서 올리기 .
++         */
++        val fos = FileOutputStream(thumbnailFile)
++        bitmap?.compress(Bitmap.CompressFormat.JPEG, 100, fos)
++        fos.close()
++    }
++
++    //빼올 떄?
++
++    private fun getFilePathUri(uri: Uri) : String{ //URI를 String으로
++        val buildName = Build.MANUFACTURER
++
++        // 샤오미 폰은 바로 경로 반환 가능
++        if (buildName.equals("Xiaomi")) {
++            return uri.path.toString()
++        }
++
++        var columnIndex = 0
++        val proj = arrayOf(MediaStore.Images.Media.DATA)
++        var cursor = requireActivity().contentResolver.query(uri, proj, null, null, null)
++
++        if (cursor!!.moveToFirst()){
++            columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
++        }
++
++        return cursor.getString(columnIndex)
++    }
++
++    /**
++     *
++     *
++     * */
++
+     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+         super.onActivityResult(requestCode, resultCode, data)
+         if (resultCode == Activity.RESULT_OK) {
+             when (requestCode) {
+                 imagePickCode -> {
++
++                    //비트맵을 파일 경로로 바꾸는 로직 기존 미팅 포스트?
++
+                     data?.data?.let { uri ->
+                         Glide.with(this)
+                             .load(uri)
+@@ -141,6 +191,8 @@
+                     }
+                 }
+                 cameraRequestCode -> {
++
++                    //비트맵을 파일 경로로 바꾸는 로직
+                     val thumbnail = data?.extras?.get("data") as? Bitmap
+                     thumbnail?.let {
+                         Glide.with(this)
+@@ -155,16 +207,17 @@
+             Log.d(TAG, "onActivityResult: ")
+         }
+     }
++    //칩 그룹주ㅇㄴㄻㄹㅇㄴ
+     private lateinit var selectedChip:MutableList<Int>
+     private lateinit var selectedChipName : MutableList<String>
+-    private fun selectCategory(){
++    private fun selectCategoryFirst(){
+         val chipGroup: ChipGroup = binding.chipGroup1
++
+         Log.d(TAG, "selectCategory:1")
+         chipGroup.setOnCheckedStateChangeListener {
+                 group, checkId ->
+             selectedChip= checkId;
+             Log.d(TAG, "selectCategory: ${selectedChip}")
+-
+             if (selectedChip != null) {
+                 for (token  in selectedChip){ // 다 선택 됐고 다음 버튼을 눌렀을 때 현재 담아 있떤 리스트값들을 for문을 돌면서 유저 카테고리에 저장.
+                     val selectedChipId = token //
+@@ -177,7 +230,27 @@
+             //모든 칩들의 공통 특성 선택
+         }
+     }
+-
++    private lateinit var selectedChipSecond:MutableList<Int>
++    private fun selectCategorySecond(){
++        val chipGroup: ChipGroup = binding.chipGroup2
++        selectedChipName = mutableListOf()
++        Log.d(TAG, "selectCategory:1")
++        chipGroup.setOnCheckedStateChangeListener {
++                group, checkId ->
++            selectedChipSecond= checkId;
++            Log.d(TAG, "selectCategory: ${selectedChipSecond}")
++            if (selectedChipSecond != null) {
++                for (token  in selectedChipSecond){ // 다 선택 됐고 다음 버튼을 눌렀을 때 현재 담아 있떤 리스트값들을 for문을 돌면서 유저 카테고리에 저장.
++                    val selectedChipId = token //
++                    val selctedName = group.findViewById<Chip>(selectedChipId)
++                    selectedChipName.add(selctedName.text.toString())
++                    Log.d(TAG, "Selected Chip ID: $selectedChipId, Text: $selectedChipSecond")
++                    Log.d(TAG, "selctedName: ${selctedName.text.toString()}, Text: ${selctedName.id.toString()}")
++                }
++            }
++            //모든 칩들의 공통 특성 선택
++        }
++    }
+ 
+     override fun onCreateView(
+         inflater: LayoutInflater, container: ViewGroup?,

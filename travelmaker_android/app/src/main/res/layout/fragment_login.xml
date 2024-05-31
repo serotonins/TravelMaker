@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_login_main_img"
+            android:layout_width="match_parent"
+            android:layout_height="347dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_login_sign2"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="0dp" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_login_id"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="40dp"
+        android:textColorHint="@color/hint_color"
+        app:boxStrokeColor="@drawable/selector_input_layout_color"
+        app:hintTextAppearance="@style/TextLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_login_main_img">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tie_login_Id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/login_input_id" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_login_password"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:textColorHint="@color/hint_color"
+        app:boxStrokeColor="@drawable/selector_input_layout_color"
+        app:helperTextEnabled="true"
+        app:hintTextAppearance="@style/TextLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/til_login_id"
+        app:passwordToggleEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tie_login_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/login_input_password"
+            android:inputType="textPassword"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/btn_login_login"
+        android:layout_width="149dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_login_button_ripple"
+        android:text="@string/button_login"
+        android:textColor="@color/button_text_color"
+        app:backgroundTint="@null"
+        app:layout_constraintStart_toStartOf="@id/til_login_password"
+        app:layout_constraintTop_toBottomOf="@id/til_login_password" />
+
+    <Button
+        android:id="@+id/btn_login_signup"
+        android:layout_width="149dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_button_certification_ripple"
+        android:text="@string/button_signup"
+        android:textColor="@color/button_text_color"
+        app:backgroundTint="@null"
+        app:layout_constraintEnd_toEndOf="@id/til_login_password"
+        app:layout_constraintTop_toBottomOf="@id/til_login_password" />
+
+    <TextView
+        android:id="@+id/tv_login_find_id"
+        style="@style/Text.Regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/login_find_id"
+        android:textSize="14sp"
+        android:layout_marginTop="22dp"
+        app:layout_constraintEnd_toEndOf="@id/btn_login_login"
+        app:layout_constraintStart_toStartOf="@id/btn_login_login"
+        app:layout_constraintTop_toBottomOf="@id/btn_login_login" />
+
+    <TextView
+        android:id="@+id/tv_login_find_password"
+        style="@style/Text.Regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/login_find_password"
+        android:textSize="14sp"
+        android:layout_marginTop="22dp"
+        app:layout_constraintEnd_toEndOf="@id/btn_login_signup"
+        app:layout_constraintStart_toStartOf="@id/btn_login_signup"
+        app:layout_constraintTop_toBottomOf="@id/btn_login_signup" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

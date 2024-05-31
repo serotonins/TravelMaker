@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_signup_id_pw_title"
+
+        style="@style/Text.Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/signup_idpw_title"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.15" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_signup_id"
+        style="@style/TextLabel"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/signup_label_id"
+        app:boxCornerRadiusBottomEnd="16dp"
+        app:boxCornerRadiusBottomStart="16dp"
+        app:boxCornerRadiusTopEnd="16dp"
+        app:boxCornerRadiusTopStart="16dp"
+        app:boxStrokeColor="@drawable/selector_input_layout_color"
+        app:helperText="@string/signup_id_helper_msg"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_signup_id_pw_title"
+        android:layout_marginTop="50dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_signup_id"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:hint="@string/signup_hint_id_msg"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_signup_id"
+        android:layout_width="71dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_duplicate_check"
+        android:text="@string/signup_btn_check_dup_id"
+        app:layout_constraintStart_toEndOf="@id/til_signup_id"
+        app:layout_constraintTop_toBottomOf="@id/tv_signup_id_pw_title"
+        android:layout_marginTop="60dp"
+        android:layout_marginStart="10dp"/>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_signup_pw"
+        style="@style/TextLabel"
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/signup_label_pw"
+        app:boxCornerRadiusBottomEnd="16dp"
+        app:boxCornerRadiusBottomStart="16dp"
+        app:boxCornerRadiusTopEnd="16dp"
+        app:boxCornerRadiusTopStart="16dp"
+        app:boxStrokeColor="@drawable/selector_input_layout_color"
+        app:endIconMode="password_toggle"
+        app:helperText="@string/signup_pw_helper_msg"
+        app:layout_constraintTop_toBottomOf="@id/til_signup_id"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_signup_pw"
+
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:hint="@string/signup_hint_pw_msg"
+            android:inputType="textPassword"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/tv_signup_idpw_next"
+        style="@style/Text.Regular20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/signup_next"
+        android:background="@drawable/btn_ripple_effect"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="18dp"
+        android:layout_marginEnd="25dp"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/btn_myinfo_edit"
+            style="@style/Widget.Material3.Button.ElevatedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:textColor="@color/light_gray"
+            android:text="@string/mypage_edit_personal_info"
+
+            android:textSize="14sp"
+            android:textStyle="normal"
+            app:layout_constraintBottom_toTopOf="@+id/rc_my_page_category"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btn_mypage_logout"
+            app:layout_constraintTop_toBottomOf="@id/tv_mypage_nickname"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <FrameLayout
+            android:id="@+id/fl_mypage_profile_picture"
+            android:layout_width="168dp"
+            android:layout_height="168dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.05">
+            <com.google.android.material.card.MaterialCardView
+                android:layout_gravity="center"
+
+                android:id="@+id/cv_profile"
+                android:layout_width="148dp"
+                android:layout_height="148dp"
+                app:cardCornerRadius="50dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_signup_location_title1" >
+
+                <ImageView
+                    android:id="@+id/iv_mypage_profile_img"
+                    android:layout_width="148dp"
+                    android:layout_height="148dp"
+                    android:background="@drawable/ic_empty_profile_circle" />
+
+            </com.google.android.material.card.MaterialCardView>
+            <ImageView
+                android:id="@+id/iv_mypage_profile_edit"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="bottom|end"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/ic_signup_profile_add" />
+        </FrameLayout>
+
+
+        <TextView
+            android:id="@+id/tv_mypage_nickname"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:paddingLeft="16dp"
+            android:text="@string/mypage_nickname"
+            android:textColor="@color/light_gray"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/btn_mypage_logout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/fl_mypage_profile_picture"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottie_my_trustlevel"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:lottie_repeatCount="10"
+            android:visibility="visible"
+            app:lottie_autoPlay="true"
+            app:lottie_fileName="mypage_trustlevel3.json"
+            app:layout_constraintTop_toBottomOf="@id/rc_my_page_category"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rc_my_page_category"
+            android:layout_width="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginLeft="12dp"
+            android:layout_height="50dp"
+            app:layout_constraintBottom_toTopOf="@+id/iv_empty_trust_level_img"
+            app:layout_constraintTop_toBottomOf="@+id/fl_mypage_profile_picture" />
+
+        <ImageView
+            android:id="@+id/iv_empty_trust_level_img"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            app:layout_constraintBottom_toBottomOf="@+id/lottie_my_trustlevel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rc_my_page_category" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_mypage_check_my_trustlevel"
+            android:background="@drawable/background_button_notify"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:text="나의 신뢰도 확인"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@+id/iv_empty_trust_level_img"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <Button
+            android:id="@+id/btn_mypage_logout"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:textColor="@color/light_gray"
+            android:layout_height="wrap_content"
+            android:text="@string/mypage_logout"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/rc_my_page_category"
+            app:layout_constraintEnd_toStartOf="@+id/btn_myinfo_edit"
+            app:layout_constraintStart_toEndOf="@+id/fl_mypage_profile_picture" />
+
+
+
+        <LinearLayout
+            android:layout_marginTop="8dp"
+            android:id="@+id/layout_my_page_linear"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_mypage_check_my_trustlevel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:orientation="vertical">
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
+                android:layout_height="1dp"/>
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="23sp"
+                android:background="@color/cardview_light_background"
+                android:textColor="@color/light_gray"
+                android:text="최근 나의 모임"/>
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
+                android:layout_height="2dp"/>
+            <include layout="@layout/click_event_profile_trip_list"/>
+            <include layout="@layout/click_event_profile_trip_list1"/>
+            <include layout="@layout/click_event_profile_trip_list"/>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

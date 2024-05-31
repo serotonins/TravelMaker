@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_signup_location_title1"
+        style="@style/Text.Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="@string/sign_profile_guide"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_marginTop="30dp"
+        android:id="@+id/cv_profile"
+        android:layout_width="148dp"
+        android:layout_height="148dp"
+        app:cardCornerRadius="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_signup_location_title1" >
+
+        <ImageView
+            android:id="@+id/iv_profile"
+            android:layout_width="148dp"
+            android:layout_height="148dp"
+            android:background="@drawable/ic_empty_profile_circle" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <ImageView
+        android:id="@+id/iv_profile_add"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/ic_signup_profile_add"
+        app:layout_constraintBottom_toBottomOf="@+id/cv_profile"
+        app:layout_constraintEnd_toEndOf="@+id/cv_profile"
+        />
+    <TextView
+        android:id="@+id/tv_profile_nickname"
+        style="@style/Text.Regular20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="@string/sign_profile_name"
+        app:layout_constraintTop_toBottomOf="@+id/cv_profile"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+    <TextView
+        android:id="@+id/tv_signup_guide"
+        style="@style/Text.Regular20"
+        android:text="@string/sign_category_guide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.16"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_profile_nickname" />
+    <!--
+          맛집(taste), 힐링(healing), 문화(culture)
+          활동(active), 사진(picture), 자연(nature)  -->
+    <!-- Example Chip 2 -->
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroup1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:chipSpacingHorizontal="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_signup_guide">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_taste"
+            style="@style/chipRegular"
+            android:text="@string/sign_chip_taste" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_healing"
+            style="@style/chipRegular"
+            android:text="@string/sign_chip_healing" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_culture"
+            style="@style/chipRegular"
+            android:text="@string/sign_chip_culture" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_shopping"
+            style="@style/chipRegular"
+            android:text="@string/sign_chip_shopping" />
+    </com.google.android.material.chip.ChipGroup>
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroup2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:chipSpacingHorizontal="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chipGroup1">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_active"
+            style="@style/chipRegular"
+            android:text="@string/sign_chip_active" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_picture"
+            style="@style/chipRegular"
+            android:text="@string/sign_chip_picture" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_nature"
+            style="@style/chipRegular"
+            android:text="@string/sign_chip_nature" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_rest"
+            style="@style/chipRegular"
+            android:text="@string/chip_rest" />
+
+    </com.google.android.material.chip.ChipGroup>
+
+    <TextView
+        android:id="@+id/tv_signup_profile_previous"
+        style="@style/Text.Regular20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginBottom="18dp"
+        android:text="@string/signup_previous"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_signup_profile_next"
+        style="@style/Text.Regular20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_ripple_effect"
+        android:text="@string/signup_next"
+        android:layout_marginEnd="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_signup_profile_previous" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

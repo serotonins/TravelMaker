@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.exoplayer2.ui.PlayerView
+        android:id="@+id/player_view_pamphlet"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="100dp"
+        app:resize_mode="zoom"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="60dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_pamphlet_detail_image_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/player_view_pamphlet"
+        app:layout_constraintTop_toTopOf="@id/player_view_pamphlet">
+
+        <ImageView
+            android:id="@+id/iv_pamphlet_detail"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/test" />
+
+        <ImageView
+            android:id="@+id/iv_pamphlet_detail_emoji"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:elevation="4dp"
+            app:layout_constraintStart_toStartOf="@id/iv_pamphlet_detail"
+            app:layout_constraintTop_toTopOf="@id/iv_pamphlet_detail"
+            tools:src="@drawable/smile" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/tv_pamphlet_detail_text"
+        style="@style/Text.Input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/background_record_text"
+        android:gravity="center"
+        android:maxLines="2"
+        android:padding="10dp"
+        app:layout_constraintTop_toBottomOf="@id/layout_pamphlet_detail_image_text"
+        tools:text="아름다운 바다에서 한 컷" />
+
+
+    <TextView
+        android:id="@+id/tv_item_pamphlet_detail_page"
+        style="@style/Text.Input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:letterSpacing="0.2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="3/4" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
